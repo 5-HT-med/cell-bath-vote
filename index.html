@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>为“细胞浴场”选个英文名</title>
+    <style>
+        :root {
+            --primary: #00b4d8; /* 细胞蓝 */
+            --primary-dark: #0077b6;
+            --bg: #f0f8ff;
+            --card-bg: #ffffff;
+            --text: #333;
+            --text-sub: #666;
+        }
+
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background: var(--bg);
+            background-image: radial-gradient(#e0f7fa 2px, transparent 2px);
+            background-size: 20px 20px;
+            margin: 0;
+            padding: 20px;
+            color: var(--text);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 500px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-top: 20px;
+        }
+
+        h1 {
+            font-size: 24px;
+            margin-bottom: 8px;
+            color: var(--primary-dark);
+        }
+
+        p.subtitle {
+            font-size: 14px;
+            color: var(--text-sub);
+            line-height: 1.6;
+        }
+
+        /* 投票选项卡片样式 */
+        .option-card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 16px;
+            margin-bottom: 12px;
+            box-shadow: 0 4px 15px rgba(0, 180, 216, 0.1);
+            border: 2px solid transparent;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .option-card:active {
+            transform: scale(0.98);
+        }
+
+        /* 选中时的样式 */
+        .option-card.selected {
+            border-color: var(--primary);
+            background: #e0f7fa;
+        }
+
+        .radio-btn {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            border: 2px solid #ccc;
+            margin-right: 15px;
+            flex-shrink: 0;
+            position: relative;
+        }
+
+        .option-card.selected .radio-btn {
+            border-color: var(--primary);
+            background: var(--primary);
+        }
+
+        .option-card.selected .radio-btn::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 8px;
+            height: 8px;
+            background: white;
+            border-radius: 50%;
+        }
+
+        .option-info h3 {
+            margin: 0 0 4px 0;
+            font-size: 18px;
+        }
+
+        .option-info span {
+            font-size: 12px;
+            color: var(--text-sub);
+        }
+
+        .submit-btn {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            border: none;
+            width: 100%;
+            padding: 16px;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: bold;
+            margin-top: 20px;
+            box-shadow: 0 8px 20px rgba(0, 119, 182, 0.3);
+            cursor: pointer;
+        }
+
+        .submit-btn:disabled {
+            background: #ccc;
+            box-shadow: none;
+        }
+
+        /* 隐藏原生 Radio */
+        input[type="radio"] {
+            display: none;
+        }
+
+        /* 底部版权 */
+        .footer {
+            margin-top: 40px;
+            text-align: center;
+            font-size: 12px;
+            color: #999;
+        }
+        
+        /* 简单的 Loading 动画 */
+        .loader {
+            display: none;
+            border: 3px solid #f3f3f3;
+            border-radius: 50%;
+            border-top: 3px solid #fff;
+            width: 20px;
+            height: 20px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+        
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>Cell Bath · 域名投票</h1>
+        <p class="subtitle">我要建一个名为“细胞浴场”的个人网站。<br>请帮我选一个你觉得最酷的英文名！</p>
+    </header>
+
+    <!-- 
+       !!! 重要步骤 !!!
+       请访问 https://formspree.io/ 并注册一个免费账号。
+       创建一个新 Form，将生成的 URL 替换掉下面的 action 地址。
+       这样别人投票后，你就会收到邮件通知。
+    -->
+    <form id="voteForm" action="https://formspree.io/f/YOUR_FORM_ID_HERE" method="POST">
+        
+        <!-- 选项 1 -->
+        <label class="option-card" onclick="selectOption(this)">
+            <input type="radio" name="domain_choice" value="Cellarium" required>
+            <div class="radio-btn"></div>
+            <div class="option-info">
+                <h3>Cellarium.com</h3>
+                <span>Cell (细胞) + Arium (场所/馆) <br>如同水族馆般的细胞秘境</span>
+            </div>
+        </label>
+
+        <!-- 选项 2 -->
+        <label class="option-card" onclick="selectOption(this)">
+            <input type="radio" name="domain_choice" value="CytoBath">
+            <div class="radio-btn"></div>
+            <div class="option-info">
+                <h3>CytoBath.com</h3>
+                <span>Cyto (生物学词根:细胞) + Bath <br>赛博朋克感的科技浴场</span>
+            </div>
+        </label>
+
+        <!-- 选项 3 -->
+        <label class="option-card" onclick="selectOption(this)">
+            <input type="radio" name="domain_choice" value="CellSoak">
+            <div class="radio-btn"></div>
+            <div class="option-info">
+                <h3>CellSoak.com</h3>
+                <span>Soak (浸泡) <br>更具沉浸感和治愈感的动作</span>
+            </div>
+        </label>
+
+        <!-- 选项 4 -->
+        <label class="option-card" onclick="selectOption(this)">
+            <input type="radio" name="domain_choice" value="CellBath">
+            <div class="radio-btn"></div>
+            <div class="option-info">
+                <h3>CellBath.com</h3>
+                <span>最直白、极简的翻译 <br>简单好记</span>
+            </div>
+        </label>
+
+        <button type="submit" class="submit-btn" id="submitBtn">
+            <span id="btnText">投出一票</span>
+            <div class="loader" id="loader"></div>
+        </button>
+
+    </form>
+
+    <div class="footer">
+        © 2026 细胞浴场 · Cell Bath
+    </div>
+</div>
+
+<script>
+    // 处理点击卡片变色效果
+    function selectOption(element) {
+        // 移除所有卡片的选中状态
+        document.querySelectorAll('.option-card').forEach(card => {
+            card.classList.remove('selected');
+        });
+        // 给当前卡片添加选中状态
+        element.classList.add('selected');
+    }
+
+    // 处理表单提交（防止跳转，实现无刷新提交）
+    const form = document.getElementById("voteForm");
+    
+    async function handleSubmit(event) {
+        event.preventDefault();
+        
+        // 检查是否选择了选项
+        const selected = document.querySelector('input[name="domain_choice"]:checked');
+        if (!selected) {
+            alert("请先选择一个你喜欢的名字哦！");
+            return;
+        }
+
+        const btn = document.getElementById("submitBtn");
+        const btnText = document.getElementById("btnText");
+        const loader = document.getElementById("loader");
+        const status = document.createElement("div"); // 用于显示结果
+
+        // 按钮进入 Loading 状态
+        btn.disabled = true;
+        btnText.style.display = "none";
+        loader.style.display = "block";
+
+        const data = new FormData(event.target);
+        
+        try {
+            // 发送数据
+            const response = await fetch(event.target.action, {
+                method: form.method,
+                body: data,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            });
+
+            if (response.ok) {
+                // 成功
+                form.innerHTML = `
+                    <div style="text-align:center; padding: 40px 0;">
+                        <h2 style="color:var(--primary-dark)">🎉 投票成功！</h2>
+                        <p style="color:#666">感谢你为“细胞浴场”贡献的想法。</p>
+                        <p style="font-size:12px; color:#999; margin-top:20px;">Reviewing your choice...</p>
+                    </div>
+                `;
+            } else {
+                // 失败
+                throw new Error('提交失败');
+            }
+        } catch (error) {
+            alert("哎呀，提交出错了，请稍后再试。");
+            // 恢复按钮
+            btn.disabled = false;
+            btnText.style.display = "inline";
+            loader.style.display = "none";
+        }
+    }
+
+    form.addEventListener("submit", handleSubmit);
+</script>
+
+</body>
+</html>
